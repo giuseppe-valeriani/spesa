@@ -41,12 +41,12 @@ export default function Home() {
     setState([...state, food]);
   };
 
-  const handleDelete = (a) => {
-    console.log(a);
+  const handleDelete = (selected) => {
     // const erased = state.filter((useless) => {
-    //   useless.id === useless.id;
+    //   useless.id !== selected.id;
     // });
-    // console.log(erased);
+    console.log(selected);
+    setState(state.filter((element) => element.id !== selected.id));
   };
 
   return (
@@ -66,7 +66,7 @@ export default function Home() {
                 <ul className="d-flex p-2 justify-content-around" key={food.id}>
                   {food.name}
                   <Button
-                    onClick={(id) => handleDelete}
+                    onClick={(id) => handleDelete(id)}
                     size="sm"
                     variant="danger"
                   >
