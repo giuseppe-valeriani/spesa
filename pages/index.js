@@ -1,50 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Card, Button, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
-let list = [
-  {
-    id: '5555cf12-ea4b-42b7-947f-0d4ea2332be0',
-    name: 'pasta',
-    home: true,
-  },
-  {
-    id: '8fa56a2f-654a-4427-90d7-d49253a83862',
-    name: 'pesce',
-    home: false,
-  },
-  {
-    id: '82c5defe-7971-4ba2-9ce9-250e159bc23f',
-    name: 'vino',
-    home: false,
-  },
-  {
-    id: '9a90e02f-9e58-4f14-81a0-af056ee428ac',
-    name: 'pane',
-    home: true,
-  },
-];
-
 export default function Home() {
+  let list = [];
   const [state, setState] = useState(list);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('list');
+    const savedList = stored ? JSON.parse(stored) : [];
+    if (savedList.length > 0) {
+      setState(savedList);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (list !== state) {
+      localStorage.setItem('list', JSON.stringify(state));
+    }
+  }, [state]);
+
   const [edit, setEdit] = useState(false);
   const [newFood, setNewFood] = useState();
 
-  const handleEditMode = (e) => {
+  const handleEditMode = () => {
     setEdit(!edit);
   };
 
-  const add = (e) => {
-    const newFood = {
-      id: uuidv4(),
+  const handleSetNewFood = (e) => {
+    setNewFood(e.target.value);
+  };
 
-      name: e.target.value,
+  const addFood = () => {
+    const food = {
+      id: uuidv4(),
+      name: newFood,
       home: false,
     };
-    console.log(e.target.value);
-    setState([...state, newFood]);
-    console.log(list);
+    setState([...state, food]);
+  };
+
+  const handleDelete = (a) => {
+    console.log(a);
+    // const erased = state.filter((useless) => {
+    //   useless.id === useless.id;
+    // });
+    // console.log(erased);
   };
 
   return (
@@ -63,7 +65,11 @@ export default function Home() {
               return (
                 <ul className="d-flex p-2 justify-content-around" key={food.id}>
                   {food.name}
-                  <Button size="sm" variant="danger">
+                  <Button
+                    onClick={(id) => handleDelete}
+                    size="sm"
+                    variant="danger"
+                  >
                     x
                   </Button>
                 </ul>
@@ -72,8 +78,14 @@ export default function Home() {
           </Card>
           {edit ? (
             <div className="d-flex justify-content-center m-3">
-              <input type="text" placeholder="Che manca?" className="mx-2" />
-              <Button onClick={add}>Salva</Button>
+              <input
+                type="text"
+                onChange={handleSetNewFood}
+                id="food"
+                placeholder="Che manca?"
+                className="mx-2"
+              />
+              {newFood && <Button onClick={addFood}>Salva</Button>}
             </div>
           ) : (
             <div className="d-flex justify-content-center m-3">
