@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { Card, Button, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
+import { useForm } from 'react-hook-form';
+import FoodList from '@/components/FoodList';
 
 export default function Home() {
+  // Handling Storage In formations
   let list = [];
   const [state, setState] = useState(list);
 
@@ -21,32 +24,30 @@ export default function Home() {
     }
   }, [state]);
 
+  // edit?
   const [edit, setEdit] = useState(false);
-  const [newFood, setNewFood] = useState();
 
-  const handleEditMode = () => {
-    setEdit(!edit);
-  };
+  //React Hook Form
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const handleSetNewFood = (e) => {
-    setNewFood(e.target.value);
-  };
-
-  const addFood = () => {
-    const food = {
+  const onSubmit = (data) => {
+    const newFood = {
       id: uuidv4(),
-      name: newFood,
+      name: data.name,
       home: false,
     };
-    setState([...state, food]);
+    setState([...state, newFood]);
+    reset();
   };
 
-  const handleDelete = (selected) => {
-    // const erased = state.filter((useless) => {
-    //   useless.id !== selected.id;
-    // });
-    console.log(selected);
-    setState(state.filter((element) => element.id !== selected.id));
+  const deleteFood = (selected) => {
+    const deleted = state.filter((current) => current.id !== selected.id);
+    setState(deleted);
   };
 
   return (
@@ -57,41 +58,31 @@ export default function Home() {
       <h1 className="display-2 text-center m-3"> Lista della Spesa</h1>
       <Container className="d-flex justify-content-center">
         <Row className="p-2 m-3 justify-content-center">
+          {/* Lista in uscita */}
           <Card
             className="m-5 p-1 d-flex justify-content-center"
             style={{ width: '250px' }}
           >
-            {state.map((food) => {
+            {state.map((selectedFood) => {
               return (
-                <ul className="d-flex p-2 justify-content-around" key={food.id}>
-                  {food.name}
-                  <Button
-                    onClick={(id) => handleDelete(id)}
-                    size="sm"
-                    variant="danger"
-                  >
-                    x
-                  </Button>
+                <ul key={selectedFood.id}>
+                  <FoodList food={selectedFood} deleteFood={deleteFood} />
                 </ul>
               );
             })}
           </Card>
-          {edit ? (
-            <div className="d-flex justify-content-center m-3">
-              <input
-                type="text"
-                onChange={handleSetNewFood}
-                id="food"
-                placeholder="Che manca?"
-                className="mx-2"
-              />
-              {newFood && <Button onClick={addFood}>Salva</Button>}
-            </div>
-          ) : (
-            <div className="d-flex justify-content-center m-3">
-              <Button onClick={handleEditMode}>Aggiungi</Button>
-            </div>
-          )}
+          {/* Form di inserimento nuovo alimento */}
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="d-flex justify-content-center m-3"
+          >
+            <input
+              placeholder="Che manca?"
+              className="mx-2"
+              {...register('name', { required: true })}
+            />
+            <input className="btn btn-primary" type="submit" />
+          </form>
         </Row>
       </Container>
     </>
