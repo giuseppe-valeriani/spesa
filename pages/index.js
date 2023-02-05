@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Card, Button, Container, Row } from 'react-bootstrap';
+import { Card, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
@@ -32,7 +32,7 @@ export default function Home() {
     const newFood = {
       id: uuidv4(),
       name: data.name,
-      home: true,
+      home: false,
     };
     setState([...state, newFood]);
     reset();
@@ -41,10 +41,6 @@ export default function Home() {
   const deleteFood = (selected) => {
     const deleted = state.filter((current) => current.id !== selected.id);
     setState(deleted);
-  };
-
-  const handleBuy = (selected) => {
-    console.log(selected);
   };
 
   return (
@@ -58,16 +54,12 @@ export default function Home() {
           {/* Lista in uscita */}
           <Card
             className="m-5 p-1 d-flex justify-content-center"
-            style={{ minWidth: '300px' }}
+            style={{ minWidth: '250px', width: '300px' }}
           >
             {state.map((selectedFood) => {
               return (
                 <ul key={selectedFood.id}>
-                  <FoodList
-                    food={selectedFood}
-                    deleteFood={deleteFood}
-                    buy={handleBuy}
-                  />
+                  <FoodList food={selectedFood} deleteFood={deleteFood} />
                 </ul>
               );
             })}
