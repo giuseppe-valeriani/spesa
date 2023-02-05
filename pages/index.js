@@ -4,9 +4,10 @@ import { Card, Button, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
+import { db } from '../firebase';
 
 export default function Home() {
-  // Handling Storage In formations
+  // Handling Storage Informations
   let list = [];
   const [state, setState] = useState(list);
 
@@ -23,9 +24,6 @@ export default function Home() {
       localStorage.setItem('list', JSON.stringify(state));
     }
   }, [state]);
-
-  // edit?
-  const [edit, setEdit] = useState(false);
 
   //React Hook Form
   const {
