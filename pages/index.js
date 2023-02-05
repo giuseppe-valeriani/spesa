@@ -26,18 +26,13 @@ export default function Home() {
   }, [state]);
 
   //React Hook Form
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const newFood = {
       id: uuidv4(),
       name: data.name,
-      home: false,
+      home: true,
     };
     setState([...state, newFood]);
     reset();
@@ -46,6 +41,10 @@ export default function Home() {
   const deleteFood = (selected) => {
     const deleted = state.filter((current) => current.id !== selected.id);
     setState(deleted);
+  };
+
+  const handleBuy = (selected) => {
+    console.log(selected);
   };
 
   return (
@@ -59,12 +58,16 @@ export default function Home() {
           {/* Lista in uscita */}
           <Card
             className="m-5 p-1 d-flex justify-content-center"
-            style={{ width: '250px' }}
+            style={{ minWidth: '300px' }}
           >
             {state.map((selectedFood) => {
               return (
                 <ul key={selectedFood.id}>
-                  <FoodList food={selectedFood} deleteFood={deleteFood} />
+                  <FoodList
+                    food={selectedFood}
+                    deleteFood={deleteFood}
+                    buy={handleBuy}
+                  />
                 </ul>
               );
             })}
