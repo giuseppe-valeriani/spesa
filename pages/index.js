@@ -28,6 +28,7 @@ export default function Home() {
   //React Hook Form
   const { register, handleSubmit, reset } = useForm();
 
+  //Adding food
   const onSubmit = (data) => {
     const newFood = {
       id: uuidv4(),
@@ -38,9 +39,24 @@ export default function Home() {
     reset();
   };
 
+  //Deleting food
   const deleteFood = (selected) => {
     const deleted = state.filter((current) => current.id !== selected.id);
     setState(deleted);
+  };
+
+  //Changing food status
+  const buyFood = (selected) => {
+    const bought = state.reduce((acc, curr) => {
+      if (curr.id === selected.id) {
+        return [
+          ...acc,
+          { id: selected.id, name: selected.name, home: !selected.home },
+        ];
+      }
+      return [...acc, curr];
+    }, []);
+    setState(bought);
   };
 
   return (
@@ -59,7 +75,11 @@ export default function Home() {
             {state.map((selectedFood) => {
               return (
                 <ul key={selectedFood.id}>
-                  <FoodList food={selectedFood} deleteFood={deleteFood} />
+                  <FoodList
+                    food={selectedFood}
+                    deleteFood={deleteFood}
+                    buyFood={buyFood}
+                  />
                 </ul>
               );
             })}
