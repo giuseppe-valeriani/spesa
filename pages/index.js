@@ -16,9 +16,12 @@ import {
 
 export default function Home() {
   const [state, setState] = useState([]);
-  const [inputData, setInputData] = useState();
 
-  // Handling Storage Informations
+  //React Hook Form
+
+  const { register, handleSubmit, reset } = useForm();
+
+  // Handling Firestore Informations
 
   const usersCollectionRef = collection(db, 'list');
 
@@ -35,26 +38,6 @@ export default function Home() {
     getUsers();
   }, []);
 
-  // Handling LocalStorage Informations
-
-  // useEffect(() => {
-  //   const stored = localStorage.getItem('list');
-  //   const savedList = stored ? JSON.parse(stored) : [];
-  //   if (savedList.length > 0) {
-  //     setState(savedList);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if ([] !== state) {
-  //     localStorage.setItem('list', JSON.stringify(state));
-  //   }
-  // }, [state]);
-
-  //React Hook Form
-
-  const { register, handleSubmit, reset } = useForm();
-
   //Adding food
 
   const onSubmit = async (data) => {
@@ -64,7 +47,6 @@ export default function Home() {
       home: false,
     };
     setState([...state, newFood]);
-    setInputData(data);
     await setDoc(doc(db, 'list', `${newFood.id}`), newFood);
     reset();
   };
@@ -96,6 +78,16 @@ export default function Home() {
     });
   };
 
+  // Sorting food
+  const sortFood = () => {
+    const sorted = [...state].sort((a, b) => {
+      if (a.name > b.name) return 1;
+      if (a.name < b.name) return -1;
+      return;
+    });
+    setState(sorted);
+  };
+
   return (
     <>
       <Head>
@@ -109,6 +101,13 @@ export default function Home() {
             className="m-5 p-1 d-flex justify-content-center"
             style={{ minWidth: '250px', width: '300px' }}
           >
+            {state.length > 0 ? (
+              <Card.Header>
+                <button className="btn btn-primary btn-sm" onClick={sortFood}>
+                  Riordina
+                </button>
+              </Card.Header>
+            ) : null}
             {state.map((selectedFood) => {
               return (
                 <ul key={selectedFood.id}>
