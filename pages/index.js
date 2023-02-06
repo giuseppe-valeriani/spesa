@@ -4,31 +4,51 @@ import { Card, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
-import { db } from '../firebase';
+import { db } from '@/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Home() {
+  const [state, setState] = useState([]);
+
   // Handling Storage Informations
-  let list = [];
-  const [state, setState] = useState(list);
+
+  const usersCollectionRef = collection(db, 'list');
 
   useEffect(() => {
-    const stored = localStorage.getItem('list');
-    const savedList = stored ? JSON.parse(stored) : [];
-    if (savedList.length > 0) {
-      setState(savedList);
-    }
+    const getUsers = async () => {
+      const data = await getDocs(usersCollectionRef);
+      const cleanedData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setState(cleanedData);
+    };
+
+    getUsers();
   }, []);
 
-  useEffect(() => {
-    if (list !== state) {
-      localStorage.setItem('list', JSON.stringify(state));
-    }
-  }, [state]);
+  // Handling LocalStorage Informations
+
+  // useEffect(() => {
+  //   const stored = localStorage.getItem('list');
+  //   const savedList = stored ? JSON.parse(stored) : [];
+  //   if (savedList.length > 0) {
+  //     setState(savedList);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   if ([] !== state) {
+  //     localStorage.setItem('list', JSON.stringify(state));
+  //   }
+  // }, [state]);
 
   //React Hook Form
+
   const { register, handleSubmit, reset } = useForm();
 
   //Adding food
+
   const onSubmit = (data) => {
     const newFood = {
       id: uuidv4(),
@@ -40,12 +60,14 @@ export default function Home() {
   };
 
   //Deleting food
+
   const deleteFood = (selected) => {
     const deleted = state.filter((current) => current.id !== selected.id);
     setState(deleted);
   };
 
   //Changing food status
+
   const buyFood = (selected) => {
     const bought = state.reduce((acc, curr) => {
       if (curr.id === selected.id) {
