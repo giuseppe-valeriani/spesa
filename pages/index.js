@@ -5,10 +5,17 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
 import { db } from '@/firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  deleteDoc,
+} from 'firebase/firestore';
 
 export default function Home() {
   const [state, setState] = useState([]);
+  const [inputData, setInputData] = useState();
 
   // Handling Storage Informations
 
@@ -49,21 +56,24 @@ export default function Home() {
 
   //Adding food
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const newFood = {
       id: uuidv4(),
       name: data.name,
       home: false,
     };
     setState([...state, newFood]);
+    setInputData(data);
+    await setDoc(doc(db, 'list', `${newFood.id}`), newFood);
     reset();
   };
 
   //Deleting food
 
-  const deleteFood = (selected) => {
+  const deleteFood = async (selected) => {
     const deleted = state.filter((current) => current.id !== selected.id);
     setState(deleted);
+    await deleteDoc(doc(db, 'list', selected.id));
   };
 
   //Changing food status
