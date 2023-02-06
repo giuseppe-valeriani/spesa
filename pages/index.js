@@ -11,6 +11,7 @@ import {
   doc,
   setDoc,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 
 export default function Home() {
@@ -76,9 +77,9 @@ export default function Home() {
     await deleteDoc(doc(db, 'list', selected.id));
   };
 
-  //Changing food status
+  //Switching food status
 
-  const buyFood = (selected) => {
+  const buyFood = async (selected) => {
     const bought = state.reduce((acc, curr) => {
       if (curr.id === selected.id) {
         return [
@@ -89,6 +90,10 @@ export default function Home() {
       return [...acc, curr];
     }, []);
     setState(bought);
+    const gettingRef = doc(db, 'list', selected.id);
+    await updateDoc(gettingRef, {
+      home: !selected.home,
+    });
   };
 
   return (
