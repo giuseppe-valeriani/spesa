@@ -1,3 +1,7 @@
 input:checked + label {
   text-decoration: line-through;
 }
+
+body {
+  background-color: #e19999;
+}

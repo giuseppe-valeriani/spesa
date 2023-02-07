@@ -40,10 +40,10 @@ export default function Home() {
 
   //Adding food
 
-  const onSubmit = async (data) => {
+  const onSubmit = async ({ name }) => {
     const newFood = {
       id: uuidv4(),
-      name: data.name,
+      name: name,
       home: false,
     };
     setState([...state, newFood]);
@@ -96,30 +96,6 @@ export default function Home() {
       <h1 className="display-2 text-center m-3"> Lista della Spesa</h1>
       <Container className="d-flex justify-content-center">
         <Row className="p-2 m-3 justify-content-center">
-          {/* Lista in uscita */}
-          <Card
-            className="m-5 p-1 d-flex justify-content-center"
-            style={{ minWidth: '250px', width: '300px' }}
-          >
-            {state.length > 0 ? (
-              <Card.Header>
-                <button className="btn btn-primary btn-sm" onClick={sortFood}>
-                  Riordina
-                </button>
-              </Card.Header>
-            ) : null}
-            {state.map((selectedFood) => {
-              return (
-                <ul key={selectedFood.id}>
-                  <FoodList
-                    food={selectedFood}
-                    deleteFood={deleteFood}
-                    buyFood={buyFood}
-                  />
-                </ul>
-              );
-            })}
-          </Card>
           {/* Form di inserimento nuovo alimento */}
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -132,6 +108,32 @@ export default function Home() {
             />
             <input className="btn btn-primary" type="submit" />
           </form>
+          {/* Lista in uscita */}
+          {state.length > 0 ? (
+            <Card
+              className="m-5 p-1 d-flex justify-content-center"
+              style={{ minWidth: '250px', width: '300px' }}
+            >
+              <Card.Header>
+                <button className="btn btn-primary btn-sm" onClick={sortFood}>
+                  Riordina
+                </button>
+              </Card.Header>
+              <Card.Body>
+                {state.map((selectedFood) => {
+                  return (
+                    <ul key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </ul>
+                  );
+                })}
+              </Card.Body>
+            </Card>
+          ) : null}
         </Row>
       </Container>
     </>
