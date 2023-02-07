@@ -12,6 +12,8 @@ import {
   setDoc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
 } from 'firebase/firestore';
 
 export default function Home() {
@@ -23,11 +25,11 @@ export default function Home() {
 
   // Handling Firestore Informations
 
-  const usersCollectionRef = collection(db, 'list');
-
   useEffect(() => {
+    const collectionRef = collection(db, 'list');
+    const q = query(collectionRef, orderBy('name'));
     const getUsers = async () => {
-      const data = await getDocs(usersCollectionRef);
+      const data = await getDocs(q);
       const cleanedData = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
