@@ -21,7 +21,7 @@ function FoodList({ food, deleteFood, buyFood }) {
         onChange={handleOnChange}
       />
       <label htmlFor="home" className="text-uppercase">
-        {food.name}
+        <small>{food.name}</small>
       </label>
       <button onClick={erase} className="btn btn-danger btn-sm mx-4">
         x

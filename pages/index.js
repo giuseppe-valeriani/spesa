@@ -114,7 +114,7 @@ export default function Home() {
           {state.length > 0 ? (
             <Card
               className="m-5 p-1 d-flex justify-content-center"
-              style={{ minWidth: '250px', width: '300px' }}
+              style={{ minWidth: '300px', width: '350px' }}
             >
               <Card.Header>
                 <button className="btn btn-primary btn-sm" onClick={sortFood}>
