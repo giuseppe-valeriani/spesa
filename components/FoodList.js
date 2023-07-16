@@ -13,17 +13,15 @@ function FoodList({ food, deleteFood, buyFood }) {
   };
 
   return (
-    <div className="d-flex p-2 justify-content-between">
+    <div className="food-list">
       <input
         type="checkbox"
         name="home"
         checked={isChecked}
         onChange={handleOnChange}
       />
-      <label htmlFor="home" className="text-uppercase">
-        <small>{food.name}</small>
-      </label>
-      <button onClick={erase} className="btn btn-danger btn-sm mx-4">
+      <label htmlFor="home">{food.name}</label>
+      <button className="button__delete" onClick={erase}>
         x
       </button>
     </div>

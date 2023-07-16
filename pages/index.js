@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Card, Container, Row } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
@@ -95,49 +94,40 @@ export default function Home() {
       <Head>
         <title>Lista della Spesa</title>
       </Head>
-      <h1 className="display-2 text-center m-3"> Lista della Spesa</h1>
-      <Container className="d-flex justify-content-center">
-        <Row className="p-2 m-3 justify-content-center">
-          {/* Form di inserimento nuovo alimento */}
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="d-flex justify-content-center m-3"
-          >
-            <input
-              placeholder="Che manca?"
-              className="mx-2"
-              {...register('name', { required: true })}
-            />
-            <input className="btn btn-primary" type="submit" />
-          </form>
-          {/* Lista in uscita */}
-          {state.length > 0 ? (
-            <Card
-              className="m-5 p-1 d-flex justify-content-center"
-              style={{ minWidth: '300px', width: '350px' }}
-            >
-              <Card.Header>
-                <button className="btn btn-primary btn-sm" onClick={sortFood}>
-                  Riordina
-                </button>
-              </Card.Header>
-              <Card.Body>
-                {state.map((selectedFood) => {
-                  return (
-                    <ul key={selectedFood.id}>
-                      <FoodList
-                        food={selectedFood}
-                        deleteFood={deleteFood}
-                        buyFood={buyFood}
-                      />
-                    </ul>
-                  );
-                })}
-              </Card.Body>
-            </Card>
-          ) : null}
-        </Row>
-      </Container>
+      <h1> Lista della Spesa</h1>
+      {/* Form di inserimento nuovo alimento */}
+      <div className="box">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            placeholder="Che manca?"
+            {...register('name', { required: true })}
+          />
+          <input type="submit" />
+        </form>
+        {/* Lista in uscita */}
+        {state.length > 0 ? (
+          <div className="list">
+            <div className="list__box">
+              <button className="button" onClick={sortFood}>
+                Riordina
+              </button>
+            </div>
+            <div className="list__rendered">
+              {state.map((selectedFood) => {
+                return (
+                  <ul key={selectedFood.id}>
+                    <FoodList
+                      food={selectedFood}
+                      deleteFood={deleteFood}
+                      buyFood={buyFood}
+                    />
+                  </ul>
+                );
+              })}
+            </div>
+          </div>
+        ) : null}
+      </div>
     </>
   );
 }

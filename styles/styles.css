@@ -3,5 +3,74 @@ input:checked + label {
 }
 
 body {
-  background-color: #e19999;
+  background-color: #164e9b;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+  margin: 1rem;
+}
+
+.box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin: 2rem;
+}
+
+form {
+  margin: 2rem;
+}
+
+.list {
+  margin: 2rem;
+  border: solid 2px white;
+  min-width: 25%;
+  width: 50%;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+.list__box {
+  padding: 0.6rem;
+  background-color: rgb(212, 215, 227);
+  border-bottom: solid 0.1rem;
+}
+
+.list__rendered {
+  font-size: large;
+}
+
+.food-list {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4rem;
+  gap: 2rem;
+  padding-top: 0.2rem;
+  margin-top: 1rem;
+}
+
+label {
+  text-transform: uppercase;
+  padding: 0 1rem;
+}
+
+.button {
+  background-color: #164e9b;
+  color: white;
+  border: white;
+  padding: 0.4rem;
+  border-radius: 2px;
+}
+
+.button__delete {
+  background-color: red;
+  color: white;
+  border: solid white 1px;
+  border-radius: 2px;
+  padding: 0.4rem;
 }
