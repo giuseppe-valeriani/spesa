@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 input:checked + label {
   text-decoration: line-through;
 }
@@ -17,12 +22,16 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  text-align: center;
+
   margin: 2rem;
 }
 
 form {
   margin: 2rem;
+}
+
+input {
+  padding: 0.4rem;
 }
 
 .list {
@@ -36,7 +45,7 @@ form {
 }
 
 .list__box {
-  padding: 0.6rem;
+  padding: 0.6rem 0;
   background-color: rgb(212, 215, 227);
   border-bottom: solid 0.1rem;
 }
@@ -48,10 +57,9 @@ form {
 .food-list {
   display: flex;
   justify-content: space-between;
-  /* margin: 0 4rem; */
   gap: 2rem;
   padding: 0.2rem;
-  margin: 1rem;
+  margin: 1rem 2rem;
 }
 
 label {
@@ -65,6 +73,7 @@ label {
   border: white;
   padding: 0.4rem;
   border-radius: 2px;
+  margin-left: 1rem;
 }
 
 .button__delete {

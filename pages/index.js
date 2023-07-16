@@ -95,7 +95,7 @@ export default function Home() {
         <title>Lista della Spesa</title>
       </Head>
       <h1> Lista della Spesa</h1>
-      {/* Form di inserimento nuovo alimento */}
+      {/* Form new food */}
       <div className="box">
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
@@ -104,7 +104,7 @@ export default function Home() {
           />
           <input type="submit" />
         </form>
-        {/* Lista in uscita */}
+        {/* Rendered List */}
         {state.length > 0 ? (
           <div className="list">
             <div className="list__box">
