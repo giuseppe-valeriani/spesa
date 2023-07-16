@@ -28,8 +28,8 @@ form {
 .list {
   margin: 2rem;
   border: solid 2px white;
-  min-width: 25%;
-  width: 50%;
+  width: 100%;
+  max-width: 40rem;
   background-color: white;
   border: 1px solid black;
   color: black;
@@ -48,10 +48,10 @@ form {
 .food-list {
   display: flex;
   justify-content: space-between;
-  margin: 0 4rem;
+  /* margin: 0 4rem; */
   gap: 2rem;
-  padding-top: 0.2rem;
-  margin-top: 1rem;
+  padding: 0.2rem;
+  margin: 1rem;
 }
 
 label {
@@ -73,4 +73,10 @@ label {
   border: solid white 1px;
   border-radius: 2px;
   padding: 0.4rem;
+}
+
+@media (min-width: 40rem) {
+  .food-list {
+    margin: 0.2 0.4rem;
+  }
 }
