@@ -15,13 +15,17 @@ function FoodList({ food, deleteFood, buyFood }) {
   return (
     <div className="food-list">
       <input
+        id={food.id}
         type="checkbox"
         name="home"
         checked={isChecked}
         onChange={handleOnChange}
       />
-      <label htmlFor="home">{food.name}</label>
-      <button className="button__delete" onClick={erase}>
+      <label className="food-list__name" htmlFor={food.id}>
+        {food.name}
+      </label>
+      <div className="food-list__shop">{food.shop}</div>
+      <button className="button__delete pointer" onClick={erase}>
         x
       </button>
     </div>

@@ -20,7 +20,12 @@ export default function Home() {
 
   //React Hook Form
 
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   // Handling Firestore Informations
 
@@ -41,11 +46,12 @@ export default function Home() {
 
   //Adding food
 
-  const onSubmit = async ({ name }) => {
+  const onSubmit = async ({ name, shop }) => {
     const newFood = {
       id: uuidv4(),
-      name: name,
       home: false,
+      name: name.trim(),
+      shop: shop,
     };
     setState([...state, newFood]);
     await setDoc(doc(db, 'list', `${newFood.id}`), newFood);
@@ -67,7 +73,12 @@ export default function Home() {
       if (curr.id === selected.id) {
         return [
           ...acc,
-          { id: selected.id, name: selected.name, home: !selected.home },
+          {
+            id: selected.id,
+            home: !selected.home,
+            name: selected.name,
+            shop: selected.shop,
+          },
         ];
       }
       return [...acc, curr];
@@ -80,11 +91,20 @@ export default function Home() {
   };
 
   // Sorting food
-  const sortFood = () => {
+  const sortFoodName = () => {
     const sorted = [...state].sort((a, b) => {
       if (a.name > b.name) return 1;
       if (a.name < b.name) return -1;
-      return;
+      return 0;
+    });
+    setState(sorted);
+  };
+
+  const sortFoodShop = () => {
+    const sorted = [...state].sort((a, b) => {
+      if (a.shop > b.shop) return 1;
+      if (a.shop < b.shop) return -1;
+      return 0;
     });
     setState(sorted);
   };
@@ -100,16 +120,58 @@ export default function Home() {
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             placeholder="Che manca?"
-            {...register('name', { required: true })}
+            {...register('name', {
+              required: { value: true, message: 'Serve sapere che cibo!' },
+            })}
           />
-          <input type="submit" />
+          {errors.name && <p className="errors">{errors.name.message}</p>}
+          <div>
+            <input
+              type="radio"
+              value="L"
+              {...register('shop', {
+                required: {
+                  value: true,
+                  message: 'Serve sapere che negozio!',
+                },
+              })}
+            />
+            <span className="radio">Lidl</span>
+            <input
+              type="radio"
+              value="T"
+              {...register('shop', {
+                required: {
+                  value: true,
+                  message: 'Serve sapere che negozio!',
+                },
+              })}
+            />
+            <span className="radio">Tesco</span>
+            <input
+              type="radio"
+              value="G"
+              {...register('shop', {
+                required: {
+                  value: true,
+                  message: 'Serve sapere che negozio!',
+                },
+              })}
+            />
+            <span className="radio">Generico</span>
+            {errors.shop && <p className="errors">{errors.shop.message}</p>}
+          </div>
+          <input className="pointer" type="submit" />
         </form>
         {/* Rendered List */}
         {state.length > 0 ? (
           <div className="list">
             <div className="list__box">
-              <button className="button" onClick={sortFood}>
-                Riordina
+              <button className="button pointer" onClick={sortFoodName}>
+                Riordina per Nome
+              </button>
+              <button className="button pointer" onClick={sortFoodShop}>
+                Riordina per Negozio
               </button>
             </div>
             <div className="list__rendered">

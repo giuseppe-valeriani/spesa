@@ -7,6 +7,10 @@ input:checked + label {
   text-decoration: line-through;
 }
 
+input {
+  padding: 0.4rem;
+}
+
 body {
   background-color: #164e9b;
 }
@@ -22,16 +26,22 @@ h1 {
   display: flex;
   align-items: center;
   flex-direction: column;
-
   margin: 2rem;
+}
+
+.radio {
+  color: white;
+  margin: 0.4rem;
+  text-decoration: none;
+}
+
+.errors {
+  color: rgb(225, 169, 66);
+  font-size: 1.5rem;
 }
 
 form {
   margin: 2rem;
-}
-
-input {
-  padding: 0.4rem;
 }
 
 .list {
@@ -62,9 +72,14 @@ input {
   margin: 1rem 2rem;
 }
 
-label {
+.food-list__name {
   text-transform: uppercase;
   padding: 0 1rem;
+  margin: auto;
+}
+
+.food-list__shop {
+  color: #164e9b;
 }
 
 .button {
@@ -74,6 +89,10 @@ label {
   padding: 0.4rem;
   border-radius: 2px;
   margin-left: 1rem;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .button__delete {
