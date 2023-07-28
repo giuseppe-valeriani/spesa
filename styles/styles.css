@@ -104,6 +104,10 @@ form {
   padding: 0.4rem;
 }
 
+.select {
+  display: inline-block;
+}
+
 @media (min-width: 40rem) {
   .food-list {
     margin: 0.2 0.4rem;

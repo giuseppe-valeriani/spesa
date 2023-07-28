@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
+import Select from '@/components/Select';
 import { db } from '@/firebase';
 import {
   collection,
@@ -17,6 +18,7 @@ import {
 
 export default function Home() {
   const [state, setState] = useState([]);
+  const [filterList, setFilterList] = useState(0);
 
   //React Hook Form
 
@@ -109,6 +111,12 @@ export default function Home() {
     setState(sorted);
   };
 
+  const handleSelect = (value) => {
+    setFilterList(value);
+
+    console.log(value);
+  };
+
   return (
     <>
       <Head>
@@ -173,6 +181,7 @@ export default function Home() {
               <button className="button pointer" onClick={sortFoodShop}>
                 Riordina per Negozio
               </button>
+              <Select filterList={filterList} handleSelect={handleSelect} />
             </div>
             <div className="list__rendered">
               {state.map((selectedFood) => {
