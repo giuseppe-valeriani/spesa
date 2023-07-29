@@ -8,7 +8,7 @@ input:checked + label {
 }
 
 input {
-  padding: 0.4rem;
+  padding: 0.3rem;
 }
 
 body {
@@ -42,26 +42,37 @@ h1 {
 
 form {
   margin: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.list__box {
+  width: 100%;
+  max-width: 40rem;
+  padding: 0.6rem 0.9rem;
+  background-color: rgb(212, 215, 227);
+  border-bottom: solid 0.1rem;
 }
 
 .list {
-  margin: 1rem;
   border: solid 2px white;
   width: 100%;
   max-width: 40rem;
+  padding: 0.6rem 0.9rem;
   background-color: white;
   border: 1px solid black;
   color: black;
 }
 
-.list__box {
-  padding: 0.3rem 0;
-  background-color: rgb(212, 215, 227);
-  border-bottom: solid 0.1rem;
-}
-
 .list__rendered {
   font-size: large;
+}
+
+select {
+  padding: 0.3rem;
+  width: 33%;
 }
 
 .food-list {
@@ -102,6 +113,10 @@ form {
   border: solid white 1px;
   border-radius: 2px;
   padding: 0.4rem;
+}
+
+.select {
+  display: inline-block;
 }
 
 @media (min-width: 40rem) {
