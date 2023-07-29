@@ -16,8 +16,11 @@ import {
 } from 'firebase/firestore';
 
 export default function Home() {
-  const [state, setState] = useState([]);
+  const [shoppingList, setShoppingList] = useState([]);
   const [filteredList, setFilteredList] = useState('A');
+
+  // Filtering Logic
+  const filtered = ['A', 'G', 'L', 'T'];
 
   //React Hook Form
 
@@ -39,7 +42,7 @@ export default function Home() {
         ...doc.data(),
         id: doc.id,
       }));
-      setState(cleanedData);
+      setShoppingList(cleanedData);
     };
 
     getUsers();
@@ -54,7 +57,7 @@ export default function Home() {
       name: name.trim(),
       shop: shop,
     };
-    setState([...state, newFood]);
+    setShoppingList([...shoppingList, newFood]);
     await setDoc(doc(db, 'list', `${newFood.id}`), newFood);
     reset();
   };
@@ -62,15 +65,17 @@ export default function Home() {
   //Deleting food
 
   const deleteFood = async (selected) => {
-    const deleted = state.filter((current) => current.id !== selected.id);
-    setState(deleted);
+    const deleted = shoppingList.filter(
+      (current) => current.id !== selected.id
+    );
+    setShoppingList(deleted);
     await deleteDoc(doc(db, 'list', selected.id));
   };
 
   //Switching food status
 
   const buyFood = async (selected) => {
-    const bought = state.reduce((acc, curr) => {
+    const bought = shoppingList.reduce((acc, curr) => {
       if (curr.id === selected.id) {
         return [
           ...acc,
@@ -84,15 +89,12 @@ export default function Home() {
       }
       return [...acc, curr];
     }, []);
-    setState(bought);
+    setShoppingList(bought);
     const gettingRef = doc(db, 'list', selected.id);
     await updateDoc(gettingRef, {
       home: !selected.home,
     });
   };
-
-  // Filtering Logic
-  const filtered = ['A', 'G', 'L', 'T'];
 
   return (
     <>
@@ -148,8 +150,8 @@ export default function Home() {
           </div>
           <input className="pointer" type="submit" />
         </form>
-        <div className="list__box list">
-          {/* Here the filter field */}
+        {/* Here the filter field */}
+        <div className="list__box">
           <select
             value={filteredList}
             onChange={(e) => setFilteredList(e.target.value)}
@@ -161,10 +163,10 @@ export default function Home() {
           </select>
         </div>
         {/* Rendered List */}
-        {state.length > 0 && filteredList === filtered[0] ? (
+        {shoppingList.length > 0 && filteredList === filtered[0] ? (
           <div className="list">
             <div className="list__rendered">
-              {state.map((selectedFood) => {
+              {shoppingList.map((selectedFood) => {
                 return (
                   <ul key={selectedFood.id}>
                     <FoodList
@@ -178,11 +180,49 @@ export default function Home() {
             </div>
           </div>
         ) : null}
-        {state.length > 0 && filteredList === filtered[1] ? (
+        {shoppingList.length > 0 && filteredList === filtered[1] ? (
           <div className="list">
             <div className="list__rendered">
-              {state
+              {shoppingList
                 .filter((shop) => shop.shop === filtered[1])
+                .map((selectedFood) => {
+                  return (
+                    <ul key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </ul>
+                  );
+                })}
+            </div>
+          </div>
+        ) : null}
+        {shoppingList.length > 0 && filteredList === filtered[2] ? (
+          <div className="list">
+            <div className="list__rendered">
+              {shoppingList
+                .filter((shop) => shop.shop === filtered[2])
+                .map((selectedFood) => {
+                  return (
+                    <ul key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </ul>
+                  );
+                })}
+            </div>
+          </div>
+        ) : null}
+        {shoppingList.length > 0 && filteredList === filtered[3] ? (
+          <div className="list">
+            <div className="list__rendered">
+              {shoppingList
+                .filter((shop) => shop.shop === filtered[3])
                 .map((selectedFood) => {
                   return (
                     <ul key={selectedFood.id}>
