@@ -55,7 +55,7 @@ form {
 }
 
 .list__box {
-  padding: 0.3rem 0;
+  padding: 0.6rem 0.9rem;
   background-color: rgb(212, 215, 227);
   border-bottom: solid 0.1rem;
 }

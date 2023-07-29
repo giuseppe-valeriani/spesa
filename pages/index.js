@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
-import Select from '@/components/Select';
 import { db } from '@/firebase';
 import {
   collection,
@@ -18,7 +17,7 @@ import {
 
 export default function Home() {
   const [state, setState] = useState([]);
-  const [filterList, setFilterList] = useState(0);
+  const [filteredList, setFilteredList] = useState('A');
 
   //React Hook Form
 
@@ -92,30 +91,8 @@ export default function Home() {
     });
   };
 
-  // Sorting food
-  const sortFoodName = () => {
-    const sorted = [...state].sort((a, b) => {
-      if (a.name > b.name) return 1;
-      if (a.name < b.name) return -1;
-      return 0;
-    });
-    setState(sorted);
-  };
-
-  const sortFoodShop = () => {
-    const sorted = [...state].sort((a, b) => {
-      if (a.shop > b.shop) return 1;
-      if (a.shop < b.shop) return -1;
-      return 0;
-    });
-    setState(sorted);
-  };
-
-  const handleSelect = (value) => {
-    setFilterList(value);
-
-    console.log(value);
-  };
+  // Filtering Logic
+  const filtered = ['A', 'G', 'L', 'T'];
 
   return (
     <>
@@ -171,18 +148,21 @@ export default function Home() {
           </div>
           <input className="pointer" type="submit" />
         </form>
+        <div className="list__box list">
+          {/* Here the filter field */}
+          <select
+            value={filteredList}
+            onChange={(e) => setFilteredList(e.target.value)}
+          >
+            <option value={filtered[0]}>(All)</option>
+            <option value={filtered[1]}>Generico</option>
+            <option value={filtered[2]}>Lidl</option>
+            <option value={filtered[3]}>Tesco</option>
+          </select>
+        </div>
         {/* Rendered List */}
-        {state.length > 0 ? (
+        {state.length > 0 && filteredList === filtered[0] ? (
           <div className="list">
-            <div className="list__box">
-              <button className="button pointer" onClick={sortFoodName}>
-                Riordina per Nome
-              </button>
-              <button className="button pointer" onClick={sortFoodShop}>
-                Riordina per Negozio
-              </button>
-              <Select filterList={filterList} handleSelect={handleSelect} />
-            </div>
             <div className="list__rendered">
               {state.map((selectedFood) => {
                 return (
@@ -195,6 +175,25 @@ export default function Home() {
                   </ul>
                 );
               })}
+            </div>
+          </div>
+        ) : null}
+        {state.length > 0 && filteredList === filtered[1] ? (
+          <div className="list">
+            <div className="list__rendered">
+              {state
+                .filter((shop) => shop.shop === filtered[1])
+                .map((selectedFood) => {
+                  return (
+                    <ul key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </ul>
+                  );
+                })}
             </div>
           </div>
         ) : null}
