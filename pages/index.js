@@ -17,7 +17,7 @@ import {
 
 export default function Home() {
   const [shoppingList, setShoppingList] = useState([]);
-  const [filteredList, setFilteredList] = useState('A');
+  const [filteredList, setFilteredList] = useState('');
 
   //React Hook Form
 
@@ -157,48 +157,42 @@ export default function Home() {
             value={filteredList}
             onChange={(e) => setFilteredList(e.target.value)}
           >
-            <option value="A">(All)</option>
+            <option value="">(All)</option>
             <option value="G">Generico</option>
             <option value="L">Lidl</option>
             <option value="T">Tesco</option>
           </select>
         </div>
 
-        {/* Rendered List */}
+        {/* Rendered Food List */}
 
-        {shoppingList.length > 0 ? (
-          <div className="list">
-            <div className="list__rendered">
-              {shoppingList
-                .filter((data) => data.shop === filteredList)
-                .map((selectedFood) => {
-                  return (
-                    <ul key={selectedFood.id}>
-                      <FoodList
-                        food={selectedFood}
-                        deleteFood={deleteFood}
-                        buyFood={buyFood}
-                      />
-                    </ul>
-                  );
-                })}
-            </div>
-            {filteredList === 'A'
-              ? shoppingList.map((selectedFood) => {
-                  return (
-                    <ul key={selectedFood.id}>
-                      <FoodList
-                        food={selectedFood}
-                        deleteFood={deleteFood}
-                        buyFood={buyFood}
-                      />
-                    </ul>
-                  );
-                })
-              : null}
+        <div className="list">
+          <div className="list__rendered">
+            {shoppingList.length > 0 && filteredList.length === 0
+              ? shoppingList.map((selectedFood) => (
+                  <ul key={selectedFood.id}>
+                    <FoodList
+                      food={selectedFood}
+                      deleteFood={deleteFood}
+                      buyFood={buyFood}
+                    />
+                  </ul>
+                ))
+              : shoppingList
+                  .filter((data) => data.shop === filteredList)
+                  .map((selectedFood) => {
+                    return (
+                      <ul key={selectedFood.id}>
+                        <FoodList
+                          food={selectedFood}
+                          deleteFood={deleteFood}
+                          buyFood={buyFood}
+                        />
+                      </ul>
+                    );
+                  })}
           </div>
-        ) : null}
-        
+        </div>
       </div>
     </>
   );
