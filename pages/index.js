@@ -19,9 +19,6 @@ export default function Home() {
   const [shoppingList, setShoppingList] = useState([]);
   const [filteredList, setFilteredList] = useState('A');
 
-  // Filtering Logic
-  const filtered = ['A', 'G', 'L', 'T'];
-
   //React Hook Form
 
   const {
@@ -102,7 +99,9 @@ export default function Home() {
         <title>Lista della Spesa</title>
       </Head>
       <h1> Lista della Spesa</h1>
+
       {/* Form new food */}
+
       <div className="box">
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
@@ -150,41 +149,28 @@ export default function Home() {
           </div>
           <input className="pointer" type="submit" />
         </form>
+
         {/* Here the filter field */}
+
         <div className="list__box">
           <select
             value={filteredList}
             onChange={(e) => setFilteredList(e.target.value)}
           >
-            <option value={filtered[0]}>(All)</option>
-            <option value={filtered[1]}>Generico</option>
-            <option value={filtered[2]}>Lidl</option>
-            <option value={filtered[3]}>Tesco</option>
+            <option value="A">(All)</option>
+            <option value="G">Generico</option>
+            <option value="L">Lidl</option>
+            <option value="T">Tesco</option>
           </select>
         </div>
+
         {/* Rendered List */}
-        {shoppingList.length > 0 && filteredList === filtered[0] ? (
-          <div className="list">
-            <div className="list__rendered">
-              {shoppingList.map((selectedFood) => {
-                return (
-                  <ul key={selectedFood.id}>
-                    <FoodList
-                      food={selectedFood}
-                      deleteFood={deleteFood}
-                      buyFood={buyFood}
-                    />
-                  </ul>
-                );
-              })}
-            </div>
-          </div>
-        ) : null}
-        {shoppingList.length > 0 && filteredList === filtered[1] ? (
+
+        {shoppingList.length > 0 ? (
           <div className="list">
             <div className="list__rendered">
               {shoppingList
-                .filter((shop) => shop.shop === filtered[1])
+                .filter((data) => data.shop === filteredList)
                 .map((selectedFood) => {
                   return (
                     <ul key={selectedFood.id}>
@@ -197,14 +183,8 @@ export default function Home() {
                   );
                 })}
             </div>
-          </div>
-        ) : null}
-        {shoppingList.length > 0 && filteredList === filtered[2] ? (
-          <div className="list">
-            <div className="list__rendered">
-              {shoppingList
-                .filter((shop) => shop.shop === filtered[2])
-                .map((selectedFood) => {
+            {filteredList === 'A'
+              ? shoppingList.map((selectedFood) => {
                   return (
                     <ul key={selectedFood.id}>
                       <FoodList
@@ -214,29 +194,11 @@ export default function Home() {
                       />
                     </ul>
                   );
-                })}
-            </div>
+                })
+              : null}
           </div>
         ) : null}
-        {shoppingList.length > 0 && filteredList === filtered[3] ? (
-          <div className="list">
-            <div className="list__rendered">
-              {shoppingList
-                .filter((shop) => shop.shop === filtered[3])
-                .map((selectedFood) => {
-                  return (
-                    <ul key={selectedFood.id}>
-                      <FoodList
-                        food={selectedFood}
-                        deleteFood={deleteFood}
-                        buyFood={buyFood}
-                      />
-                    </ul>
-                  );
-                })}
-            </div>
-          </div>
-        ) : null}
+        
       </div>
     </>
   );
