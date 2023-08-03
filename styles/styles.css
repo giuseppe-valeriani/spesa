@@ -95,6 +95,10 @@ select {
   color: #164e9b;
 }
 
+.food-list__empty {
+  color: white;
+}
+
 .button {
   background-color: #164e9b;
   color: white;
