@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 
+import Modal from '@/components/Modal';
+
 function FoodList({ food, deleteFood, buyFood }) {
   const [isChecked, setIsChecked] = useState(food.home);
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  const deletingHandler = () => {
+    setIsDeleting(prevState => !prevState)
+  }
 
   const erase = () => {
     deleteFood(food);
@@ -13,6 +20,8 @@ function FoodList({ food, deleteFood, buyFood }) {
   };
 
   return (
+    <>
+    {isDeleting ? <Modal onErase={erase} onCancel={deletingHandler} /> : null}
     <div className="food-list">
       <input
         id={food.id}
@@ -25,10 +34,11 @@ function FoodList({ food, deleteFood, buyFood }) {
         {food.name}
       </label>
       <div className="food-list__shop">{food.shop}</div>
-      <button className="button__delete pointer" onClick={erase}>
+      <button className="button__delete pointer" onClick={deletingHandler}>
         x
       </button>
     </div>
+    </>
   );
 }
 
