@@ -116,7 +116,7 @@ select {
   background-color: red;
   color: white;
   border: solid white 1px;
-  border-radius: 2px;
+  border-radius: 10px;
   padding: 0.4rem;
 }
 
