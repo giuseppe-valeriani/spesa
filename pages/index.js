@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import FoodList from '@/components/FoodList';
-import { db } from '@/firebase';
+import { db } from '/firebase';
 import {
   collection,
   getDocs,
