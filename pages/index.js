@@ -102,109 +102,114 @@ export default function Home() {
 
       {/* Form new food */}
       <main>
-        <article className="input-box">
-          <form
-            className="input-box__container"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <input
-              className="input-box__input"
-              placeholder="What do you need?"
-              {...register('name', {
-                required: { value: true, message: 'You need to name a food!' },
-              })}
-            />
-            {errors.name && (
-              <p className="input-box__errors">{errors.name.message}</p>
-            )}
-            <div>
+        <section className='viewport'>
+          <article className="input-box">
+            <form
+              className="input-box__container"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <input
-                type="radio"
-                value="L"
-                {...register('shop', {
+                className="input-box__input"
+                placeholder="What do you need?"
+                {...register('name', {
                   required: {
                     value: true,
-                    message: 'You need to name a shop!',
+                    message: 'You need to name a food!',
                   },
                 })}
               />
-              <span className="input-box__radio">Lidl</span>
-              <input
-                type="radio"
-                value="T"
-                {...register('shop', {
-                  required: {
-                    value: true,
-                    message: 'You need to name a shop!',
-                  },
-                })}
-              />
-              <span className="input-box__radio">Tesco</span>
-              <input
-                type="radio"
-                value="G"
-                {...register('shop', {
-                  required: {
-                    value: true,
-                    message: 'You need to name a shop!',
-                  },
-                })}
-              />
-              <span className="input-box__radio">Generic</span>
-              {errors.shop && (
-                <p className="input-box__errors">{errors.shop.message}</p>
+              {errors.name && (
+                <p className="input-box__errors">{errors.name.message}</p>
               )}
-            </div>
-            <input className="input-box__pointer" type="submit" />
-          </form>
-        </article>
-
-        {/* Here the filter field */}
-        <article className="filter__box">
-          <select
-            className="filter__box--select"
-            value={filteredList}
-            onChange={(e) => setFilteredList(e.target.value)}
-          >
-            <option value="">(All)</option>
-            <option value="G">Generico</option>
-            <option value="L">Lidl</option>
-            <option value="T">Tesco</option>
-          </select>
-        </article>
-
-        {/* Rendered Food List */}
-
-        <article className="list">
-          <ul className="list__container">
-            {shoppingList.length === 0 && (
-              <p className="list__empty">Nessun alimento in lista.</p>
-            )}
-            {shoppingList.length > 0 && filteredList.length === 0
-              ? shoppingList.map((selectedFood) => (
-                  <li key={selectedFood.id}>
-                    <FoodList
-                      food={selectedFood}
-                      deleteFood={deleteFood}
-                      buyFood={buyFood}
-                    />
-                  </li>
-                ))
-              : shoppingList
-                  .filter((data) => data.shop === filteredList)
-                  .map((selectedFood) => {
-                    return (
-                      <li key={selectedFood.id}>
-                        <FoodList
-                          food={selectedFood}
-                          deleteFood={deleteFood}
-                          buyFood={buyFood}
-                        />
-                      </li>
-                    );
+              <div>
+                <input
+                  type="radio"
+                  value="L"
+                  {...register('shop', {
+                    required: {
+                      value: true,
+                      message: 'You need to name a shop!',
+                    },
                   })}
-          </ul>
-        </article>
+                />
+                <span className="input-box__radio">Lidl</span>
+                <input
+                  type="radio"
+                  value="T"
+                  {...register('shop', {
+                    required: {
+                      value: true,
+                      message: 'You need to name a shop!',
+                    },
+                  })}
+                />
+                <span className="input-box__radio">Tesco</span>
+                <input
+                  type="radio"
+                  value="G"
+                  {...register('shop', {
+                    required: {
+                      value: true,
+                      message: 'You need to name a shop!',
+                    },
+                  })}
+                />
+                <span className="input-box__radio">Generic</span>
+                {errors.shop && (
+                  <p className="input-box__errors">{errors.shop.message}</p>
+                )}
+              </div>
+              <input className="input-box__pointer" type="submit" />
+            </form>
+          </article>
+
+          {/* Here the filter field */}
+          <article className="filter__box">
+            <select
+              className="filter__box--select"
+              value={filteredList}
+              onChange={(e) => setFilteredList(e.target.value)}
+            >
+              <option value="">(All)</option>
+              <option value="G">Generico</option>
+              <option value="L">Lidl</option>
+              <option value="T">Tesco</option>
+            </select>
+          </article>
+
+          {/* Rendered Food List */}
+
+          <article className="list">
+            <ul className="list__container">
+              {shoppingList.length === 0 && (
+                <p className="list__empty">Nessun alimento in lista.</p>
+              )}
+              {shoppingList.length > 0 && filteredList.length === 0
+                ? shoppingList.map((selectedFood) => (
+                    <li key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </li>
+                  ))
+                : shoppingList
+                    .filter((data) => data.shop === filteredList)
+                    .map((selectedFood) => {
+                      return (
+                        <li key={selectedFood.id}>
+                          <FoodList
+                            food={selectedFood}
+                            deleteFood={deleteFood}
+                            buyFood={buyFood}
+                          />
+                        </li>
+                      );
+                    })}
+            </ul>
+          </article>
+        </section>
       </main>
     </>
   );

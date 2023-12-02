@@ -13,14 +13,6 @@
     margin: 1rem;
   }
 
-  &__input {
-    padding: 0.5rem;
-
-    &:checked + label {
-      text-decoration: line-through;
-    }
-  }
-
   &__errors {
     color: $error-color;
     font-size: 1.2rem;

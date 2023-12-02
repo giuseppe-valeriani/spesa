@@ -27,12 +27,6 @@ body {
   align-items: flex-start;
   margin: 1rem;
 }
-.input-box__input {
-  padding: 0.5rem;
-}
-.input-box__input:checked + label {
-  text-decoration: line-through;
-}
 .input-box__errors {
   color: #f44336;
   font-size: 1.2rem;
@@ -78,6 +72,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
+}
+.element input {
+  padding: 0.5rem;
+}
+.element input:checked + label {
+  text-decoration: line-through;
 }
 .element__name {
   text-transform: uppercase;
@@ -126,4 +126,8 @@ body {
 }
 .modal__buttons--erase {
   background-color: #f44336;
+}
+
+.viewport {
+  padding: 0.5rem;
 }/*# sourceMappingURL=main.css.map */
