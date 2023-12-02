@@ -10,5 +10,7 @@
 @use './partials/modal';
 
 .viewport {
-  padding: 0.5rem;
+  padding: 1rem;
+  max-width: 30rem;
+  margin: auto;
 }

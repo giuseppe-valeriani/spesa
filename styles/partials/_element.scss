@@ -17,6 +17,10 @@
   &__name {
     text-transform: uppercase;
     font-size: small;
+
+    @media (min-width: 768px) {
+      font-size: medium;
+    }
   }
 
   &__button {

@@ -3,4 +3,8 @@
 .header {
   color: $background-text;
   text-align: center;
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 }
