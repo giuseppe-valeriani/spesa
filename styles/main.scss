@@ -1,0 +1,83 @@
+@use './partials/variables' as *;
+@use './partials/resets';
+@use './partials/header';
+@use './partials/input-box';
+@use './partials/filter-box';
+@use './partials/list';
+
+body {
+  background-color: $background-color;
+}
+
+form {
+  margin: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.list__rendered {
+  font-size: large;
+}
+
+select {
+  padding: 0.3rem;
+  width: 33%;
+}
+
+.food-list {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.2rem;
+  margin: 0.5rem 1rem;
+}
+
+.food-list__name {
+  text-transform: uppercase;
+  font-size: medium;
+  padding: 0 1rem;
+  margin: auto;
+}
+
+.food-list__shop {
+  color: $background-color;
+}
+
+.food-list__empty {
+  color: $background-text;
+}
+
+.food-list__button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.button {
+  background-color: $background-color;
+  color: white;
+  border: white;
+  padding: 0.4rem;
+  border-radius: 2px;
+  margin-left: 1rem;
+}
+
+.button__delete {
+  background-color: $error-color;
+  color: white;
+  border: solid white 1px;
+  border-radius: 10px;
+  padding: 0.4rem;
+}
+
+.select {
+  display: inline-block;
+}
+
+@media (min-width: 40rem) {
+  .food-list {
+    margin: 0.2 0.4rem;
+  }
+}

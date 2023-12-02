@@ -96,77 +96,87 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Lista della Spesa</title>
+        <title>Shopping List</title>
       </Head>
-      <h1> Lista della Spesa</h1>
+      <h1 className="header">Shopping List</h1>
 
       {/* Form new food */}
-
-      <div className="box">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <input
-            placeholder="Che manca?"
-            {...register('name', {
-              required: { value: true, message: 'Serve sapere che cibo!' },
-            })}
-          />
-          {errors.name && <p className="errors">{errors.name.message}</p>}
-          <div>
+      <main>
+        <section className="input-box">
+          <form
+            className="input-box__container"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <input
-              type="radio"
-              value="L"
-              {...register('shop', {
-                required: {
-                  value: true,
-                  message: 'Serve sapere che negozio!',
-                },
+              className="input-box__input"
+              placeholder="What do you need?"
+              {...register('name', {
+                required: { value: true, message: 'You need to name a food!' },
               })}
             />
-            <span className="radio">Lidl</span>
-            <input
-              type="radio"
-              value="T"
-              {...register('shop', {
-                required: {
-                  value: true,
-                  message: 'Serve sapere che negozio!',
-                },
-              })}
-            />
-            <span className="radio">Tesco</span>
-            <input
-              type="radio"
-              value="G"
-              {...register('shop', {
-                required: {
-                  value: true,
-                  message: 'Serve sapere che negozio!',
-                },
-              })}
-            />
-            <span className="radio">Generico</span>
-            {errors.shop && <p className="errors">{errors.shop.message}</p>}
-          </div>
-          <input className="pointer" type="submit" />
-        </form>
+            {errors.name && (
+              <p className="input-box__errors">{errors.name.message}</p>
+            )}
+            <div>
+              <input
+                type="radio"
+                value="L"
+                {...register('shop', {
+                  required: {
+                    value: true,
+                    message: 'You need to name a shop!',
+                  },
+                })}
+              />
+              <span className="input-box__radio">Lidl</span>
+              <input
+                type="radio"
+                value="T"
+                {...register('shop', {
+                  required: {
+                    value: true,
+                    message: 'You need to name a shop!',
+                  },
+                })}
+              />
+              <span className="input-box__radio">Tesco</span>
+              <input
+                type="radio"
+                value="G"
+                {...register('shop', {
+                  required: {
+                    value: true,
+                    message: 'You need to name a shop!',
+                  },
+                })}
+              />
+              <span className="input-box__radio">Generic</span>
+              {errors.shop && (
+                <p className="input-box__errors">{errors.shop.message}</p>
+              )}
+            </div>
+            <input className="input-box__pointer" type="submit" />
+          </form>
+        </section>
 
         {/* Here the filter field */}
-
-        <div className="list__box">
-          <select
-            value={filteredList}
-            onChange={(e) => setFilteredList(e.target.value)}
-          >
-            <option value="">(All)</option>
-            <option value="G">Generico</option>
-            <option value="L">Lidl</option>
-            <option value="T">Tesco</option>
-          </select>
-        </div>
+        <section>
+          <div className="filter__box">
+            <select
+              value={filteredList}
+              onChange={(e) => setFilteredList(e.target.value)}
+            >
+              <option value="">(All)</option>
+              <option value="G">Generico</option>
+              <option value="L">Lidl</option>
+              <option value="T">Tesco</option>
+            </select>
+          </div>
+        </section>
 
         {/* Rendered Food List */}
-
-        <div className="list">
+        
+        <section className="list">
           <div className="list__rendered">
             {shoppingList.length === 0 && (
               <p className="food-list__empty">Nessun alimento in lista.</p>
@@ -195,8 +205,8 @@ export default function Home() {
                     );
                   })}
           </div>
-        </div>
-      </div>
+        </section>
+      </main>
     </>
   );
 }

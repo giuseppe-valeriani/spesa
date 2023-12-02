@@ -4,13 +4,13 @@ const Modal = ({ onErase, onCancel }) => {
   return (
     <div className={classes.modal}>
       <div className={classes.card}>
-        <header className={classes.header}>Vuoi eliminare?</header>
+        <header className={classes.header}>Do you want to erase?</header>
         <div>
           <button onClick={onErase} className={classes.button}>
-            Elimina
+            Erase
           </button>
           <button onClick={onCancel} className={classes.button}>
-            No
+            Cancel
           </button>
         </div>
       </div>

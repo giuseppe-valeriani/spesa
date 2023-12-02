@@ -1,44 +1,70 @@
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   padding: 0;
 }
 
-input:checked + label {
-  text-decoration: line-through;
+.header {
+  color: #f3e1ac;
+  text-align: center;
 }
 
-input {
-  padding: 0.3rem;
-  margin: 0.1rem 0.1rem;
+.input-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem;
+}
+.input-box__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.input-box__input {
+  padding: 0.5rem;
+}
+.input-box__input:checked + label {
+  text-decoration: line-through;
+}
+.input-box__errors {
+  color: #f44336;
+  font-size: 1.2rem;
+}
+.input-box__radio {
+  color: white;
+  margin: 0.1rem;
+  text-decoration: none;
+}
+.input-box__pointer {
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  border-radius: 5%;
+}
+
+.filter__box {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  background-color: rgb(212, 215, 227);
+  border: 1px solid black;
+}
+
+.list {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid black;
+  color: black;
+  padding-inline-start: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 body {
   background-color: #164e9b;
-}
-
-h1 {
-  color: white;
-  text-align: center;
-  margin: 0.5rem;
-}
-
-.box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin: 2rem;
-}
-
-.radio {
-  color: white;
-  margin: 0.2rem;
-  text-decoration: none;
-}
-
-.errors {
-  color: rgb(225, 169, 66);
-  font-size: 1.5rem;
 }
 
 form {
@@ -47,24 +73,6 @@ form {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-}
-
-.list__box {
-  width: 100%;
-  max-width: 40rem;
-  padding: 0.6rem 0.9rem;
-  background-color: rgb(212, 215, 227);
-  border-bottom: solid 0.1rem;
-}
-
-.list {
-  border: solid 2px white;
-  width: 100%;
-  max-width: 40rem;
-  padding: 0.6rem 0.9rem;
-  background-color: white;
-  border: 1px solid black;
-  color: black;
 }
 
 .list__rendered {
@@ -96,7 +104,7 @@ select {
 }
 
 .food-list__empty {
-  color: white;
+  color: #ffffff;
 }
 
 .food-list__button {
@@ -114,12 +122,8 @@ select {
   margin-left: 1rem;
 }
 
-.pointer {
-  cursor: pointer;
-}
-
 .button__delete {
-  background-color: red;
+  background-color: #f44336;
   color: white;
   border: solid white 1px;
   border-radius: 10px;
@@ -134,4 +138,4 @@ select {
   .food-list {
     margin: 0.2 0.4rem;
   }
-}
+}/*# sourceMappingURL=main.css.map */
