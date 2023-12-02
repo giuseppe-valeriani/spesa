@@ -13,7 +13,7 @@ import {
   updateDoc,
   query,
   orderBy,
-} from 'firebase/firestore';
+} from '@firebase/firestore';
 
 export default function Home() {
   const [shoppingList, setShoppingList] = useState([]);
