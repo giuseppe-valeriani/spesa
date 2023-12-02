@@ -1,15 +1,15 @@
-import classes from './Modal.module.css';
+import React from "react";
 
-const Modal = ({ onErase, onCancel }) => {
+const Modal = ({ food, onErase, onCancel }) => {
   return (
-    <div className={classes.modal}>
-      <div className={classes.card}>
-        <header className={classes.header}>Do you want to erase?</header>
+    <div className="modal">
+      <div className="modal__card">
+        <header>Do you want to erase {food}?</header>
         <div>
-          <button onClick={onErase} className={classes.button}>
+          <button className="modal__buttons modal__buttons--erase" onClick={onErase}>
             Erase
           </button>
-          <button onClick={onCancel} className={classes.button}>
+          <button className="modal__buttons" onClick={onCancel}>
             Cancel
           </button>
         </div>

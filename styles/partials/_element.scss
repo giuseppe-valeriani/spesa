@@ -1,0 +1,29 @@
+@use './variables' as *;
+
+.element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+
+  &__name {
+    text-transform: uppercase;
+    font-size: small;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &--label {
+      color: $background-color;
+    }
+
+    &--btn {
+      border-radius: 10%;
+      background-color: $error-color;
+      color: $background-text;
+    }
+  }
+}

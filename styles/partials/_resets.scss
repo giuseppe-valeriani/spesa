@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 *,
 *::before,
 *::after {
@@ -7,4 +9,5 @@
 body {
   margin: 0;
   padding: 0;
+  background-color: $background-color;
 }

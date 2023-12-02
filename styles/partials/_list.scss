@@ -5,7 +5,14 @@
   background-color: $background-text;
   border: 1px solid black;
   color: black;
-  padding-inline-start: 0;
-  margin-block-start: 0;
-  margin-block-end: 0;
+
+  &__container {
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  &__empty {
+    color: $background-text;
+  }
 }

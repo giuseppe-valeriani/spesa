@@ -102,7 +102,7 @@ export default function Home() {
 
       {/* Form new food */}
       <main>
-        <section className="input-box">
+        <article className="input-box">
           <form
             className="input-box__container"
             onSubmit={handleSubmit(onSubmit)}
@@ -157,55 +157,54 @@ export default function Home() {
             </div>
             <input className="input-box__pointer" type="submit" />
           </form>
-        </section>
+        </article>
 
         {/* Here the filter field */}
-        <section>
-          <div className="filter__box">
-            <select
-              value={filteredList}
-              onChange={(e) => setFilteredList(e.target.value)}
-            >
-              <option value="">(All)</option>
-              <option value="G">Generico</option>
-              <option value="L">Lidl</option>
-              <option value="T">Tesco</option>
-            </select>
-          </div>
-        </section>
+        <article className="filter__box">
+          <select
+            className="filter__box--select"
+            value={filteredList}
+            onChange={(e) => setFilteredList(e.target.value)}
+          >
+            <option value="">(All)</option>
+            <option value="G">Generico</option>
+            <option value="L">Lidl</option>
+            <option value="T">Tesco</option>
+          </select>
+        </article>
 
         {/* Rendered Food List */}
-        
-        <section className="list">
-          <div className="list__rendered">
+
+        <article className="list">
+          <ul className="list__container">
             {shoppingList.length === 0 && (
-              <p className="food-list__empty">Nessun alimento in lista.</p>
+              <p className="list__empty">Nessun alimento in lista.</p>
             )}
             {shoppingList.length > 0 && filteredList.length === 0
               ? shoppingList.map((selectedFood) => (
-                  <ul key={selectedFood.id}>
+                  <li key={selectedFood.id}>
                     <FoodList
                       food={selectedFood}
                       deleteFood={deleteFood}
                       buyFood={buyFood}
                     />
-                  </ul>
+                  </li>
                 ))
               : shoppingList
                   .filter((data) => data.shop === filteredList)
                   .map((selectedFood) => {
                     return (
-                      <ul key={selectedFood.id}>
+                      <li key={selectedFood.id}>
                         <FoodList
                           food={selectedFood}
                           deleteFood={deleteFood}
                           buyFood={buyFood}
                         />
-                      </ul>
+                      </li>
                     );
                   })}
-          </div>
-        </section>
+          </ul>
+        </article>
       </main>
     </>
   );

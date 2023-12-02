@@ -21,8 +21,8 @@ function FoodList({ food, deleteFood, buyFood }) {
 
   return (
     <>
-      {isDeleting ? <Modal onErase={erase} onCancel={deletingHandler} /> : null}
-      <div className="food-list">
+      {isDeleting ? <Modal food={food.name} onErase={erase} onCancel={deletingHandler} /> : null}
+      <div className="element">
         <input
           id={food.id}
           type="checkbox"
@@ -30,12 +30,12 @@ function FoodList({ food, deleteFood, buyFood }) {
           checked={isChecked}
           onChange={handleOnChange}
         />
-        <label className="food-list__name" htmlFor={food.id}>
+        <label className="element__name" htmlFor={food.id}>
           {food.name}
         </label>
-        <div className='food-list__button'>
-          <div className="food-list__shop">{food.shop}</div>
-          <button className="button__delete pointer" onClick={deletingHandler}>
+        <div className='element__button'>
+          <div className="element__button--label">{food.shop}</div>
+          <button className="element__button--btn" onClick={deletingHandler}>
             x
           </button>
         </div>
