@@ -184,7 +184,7 @@ export default function Home() {
           <article className="list">
             <ul className="list__container">
               {shoppingList.length === 0 && (
-                <p className="list__empty">Nessun alimento in lista.</p>
+                <p className="list__empty">No food present.</p>
               )}
               {shoppingList.length > 0 && filteredList.length === 0
                 ? shoppingList.map((selectedFood) => (
