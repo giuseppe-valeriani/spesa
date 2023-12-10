@@ -102,7 +102,7 @@ export default function Home() {
 
       {/* Form new food */}
       <main>
-        <section className='viewport'>
+        <section className="viewport">
           <article className="input-box">
             <form
               className="input-box__container"
@@ -159,7 +159,9 @@ export default function Home() {
                   <p className="input-box__errors">{errors.shop.message}</p>
                 )}
               </div>
-              <input className="input-box__pointer" type="submit" />
+              <button className="input-box__button" type="submit">
+                Aggiungi
+              </button>
             </form>
           </article>
 

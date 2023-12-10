@@ -21,7 +21,9 @@ function FoodList({ food, deleteFood, buyFood }) {
 
   return (
     <>
-      {isDeleting ? <Modal food={food.name} onErase={erase} onCancel={deletingHandler} /> : null}
+      {isDeleting ? (
+        <Modal food={food.name} onErase={erase} onCancel={deletingHandler} />
+      ) : null}
       <div className="element">
         <input
           id={food.id}
@@ -33,7 +35,7 @@ function FoodList({ food, deleteFood, buyFood }) {
         <label className="element__name" htmlFor={food.id}>
           {food.name}
         </label>
-        <div className='element__button'>
+        <div className="element__button">
           <div className="element__button--label">{food.shop}</div>
           <button className="element__button--btn" onClick={deletingHandler}>
             x

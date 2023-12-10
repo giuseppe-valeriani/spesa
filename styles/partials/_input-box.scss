@@ -13,6 +13,11 @@
     margin: 1rem;
   }
 
+  &__input {
+    padding: 0.5rem;
+    width: 100%;
+  }
+
   &__errors {
     color: $error-color;
     font-size: 1.2rem;
@@ -24,9 +29,11 @@
     text-decoration: none;
   }
 
-  &__pointer {
+  &__button {
     cursor: pointer;
-    padding: 0.2rem 0.4rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    font-size: 1rem;
     border-radius: 5%;
   }
 }

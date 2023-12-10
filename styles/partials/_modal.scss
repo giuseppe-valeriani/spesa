@@ -1,7 +1,7 @@
 @use './variables' as *;
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 10%;
   right: 10%;

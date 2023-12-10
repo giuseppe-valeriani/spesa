@@ -13,6 +13,7 @@ body {
 .header {
   color: #ffffff;
   text-align: center;
+  margin-bottom: 0;
 }
 @media (min-width: 768px) {
   .header {
@@ -32,6 +33,10 @@ body {
   align-items: flex-start;
   margin: 1rem;
 }
+.input-box__input {
+  padding: 0.5rem;
+  width: 100%;
+}
 .input-box__errors {
   color: #f44336;
   font-size: 1.2rem;
@@ -41,9 +46,11 @@ body {
   margin: 0.1rem;
   text-decoration: none;
 }
-.input-box__pointer {
+.input-box__button {
   cursor: pointer;
-  padding: 0.2rem 0.4rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  font-size: 1rem;
   border-radius: 5%;
 }
 
@@ -54,7 +61,8 @@ body {
   border: 1px solid black;
 }
 .filter__box--select {
-  padding: 0.2rem 0.4rem;
+  padding: 0.4rem 1rem;
+  width: 40%;
 }
 
 .list {
@@ -87,11 +95,11 @@ body {
 }
 .element__name {
   text-transform: uppercase;
-  font-size: small;
+  font-size: 1.1rem;
 }
 @media (min-width: 768px) {
   .element__name {
-    font-size: medium;
+    font-size: 1.5rem;
   }
 }
 .element__button {
@@ -109,7 +117,7 @@ body {
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 30%;
   left: 10%;
   right: 10%;
@@ -137,6 +145,22 @@ body {
 }
 .modal__buttons--erase {
   background-color: #f44336;
+}
+
+@font-face {
+  font-family: Alegreya;
+  src: url("../fonts/AlegreyaSans-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: Alegreya;
+  src: url("../fonts/AlegreyaSans-Bold.ttf");
+  font-weight: 700;
+  font-style: bold;
+}
+* {
+  font-family: Alegreya;
 }
 
 .viewport {
