@@ -51,7 +51,7 @@ export default function App() {
     const newFood = {
       id: uuidv4(),
       home: false,
-      name: name.trim(),
+      name: name.trim().toLowerCase(),
       shop: shop,
     };
     setShoppingList([...shoppingList, newFood]);
