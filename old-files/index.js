@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
 import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
-import FoodList from './components/FoodList';
-import { db } from './firebase';
+import FoodList from '@/old-files/components/FoodList';
+import { db } from '@/firebase';
 import {
   collection,
   getDocs,
@@ -13,9 +14,8 @@ import {
   query,
   orderBy,
 } from '@firebase/firestore';
-import './styles/main.css';
 
-export default function App() {
+export default function Home() {
   const [shoppingList, setShoppingList] = useState([]);
   const [filteredList, setFilteredList] = useState('');
 
@@ -95,9 +95,11 @@ export default function App() {
 
   return (
     <>
-      <header>
-        <h1 className="header">Shopping List</h1>
-      </header>
+      <Head>
+        <title>Shopping List</title>
+      </Head>
+      <h1 className="header">Shopping List</h1>
+
       {/* Form new food */}
       <main>
         <section className="viewport">
