@@ -160,7 +160,7 @@ export default function Home() {
                 )}
               </div>
               <button className="input-box__button" type="submit">
-                Aggiungi
+                Add
               </button>
             </form>
           </article>

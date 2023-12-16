@@ -38,8 +38,8 @@ body {
   width: 100%;
 }
 .input-box__errors {
-  color: #f44336;
-  font-size: 1.2rem;
+  color: #ece90d;
+  font-size: 2rem;
 }
 .input-box__radio {
   color: white;
@@ -47,11 +47,36 @@ body {
   text-decoration: none;
 }
 .input-box__button {
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #f44336, #e62c03);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #ffffff;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  display: inline-block;
+  font-family: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.2rem;
+  height: 40px;
+  line-height: 40px;
+  outline: 0;
+  overflow: hidden;
+  padding: 0 20px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  touch-action: manipulation;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  vertical-align: top;
+  white-space: nowrap;
   width: 100%;
-  font-size: 1rem;
-  border-radius: 5%;
+  z-index: 9;
+  border: 0;
+  transition: box-shadow 0.2s;
+}
+.input-box__button:hover {
+  box-shadow: rgba(253, 76, 0, 0.5) 0 3px 8px;
 }
 
 .filter__box {
