@@ -13,7 +13,7 @@ import {
   query,
   orderBy,
 } from '@firebase/firestore';
-import './styles/main.css';
+import './styles/main.scss';
 
 export default function App() {
   const [shoppingList, setShoppingList] = useState([]);
