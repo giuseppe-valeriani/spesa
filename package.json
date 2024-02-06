@@ -1,11 +1,6 @@
 {
   "name": "spesa",
-<<<<<<< HEAD
-=======
-  "homepage": "https://gvaleriani.dev/spesa",
-  "version": "0.1.0",
->>>>>>> 916deb8feea74296075b2e2cb98ffc22d29fad5b
-  "private": true,
+  "private": "true",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
