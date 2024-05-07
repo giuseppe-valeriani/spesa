@@ -8,22 +8,8 @@
 @use "./partials/element";
 @use "./partials/modal";
 
-@font-face {
-  font-family: Alegreya;
-  src: url("/fonts/AlegreyaSans-Regular.ttf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Alegreya;
-  src: url("/fonts/AlegreyaSans-Bold.ttf");
-  font-weight: 700;
-  font-style: bold;
-}
-
-* {
-  font-family: Alegreya;
+body {
+  font-family: sans-serif;
 }
 
 .viewport {

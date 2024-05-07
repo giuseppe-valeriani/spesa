@@ -94,18 +94,16 @@ export default function App() {
   };
 
   return (
-    <>
-      <header>
-        <h1 className="header">Shopping List</h1>
-      </header>
-      {/* Form new food */}
-      <main className="viewport">
-        <section className="input-box">
-          <form
-            className="input-box__container"
-            onSubmit={handleSubmit(onSubmit)}
-          >
+    <main className="viewport">
+      <h1 className="header">Shopping List</h1>
+      <section className="input-box">
+        <form
+          className="input-box__container"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <label htmlFor="food-name">
             <input
+              id="food-name"
               className="input-box__input"
               placeholder="What do you need?"
               {...register("name", {
@@ -115,57 +113,69 @@ export default function App() {
                 },
               })}
             />
-            {errors.name && (
-              <p className="input-box__errors">{errors.name.message}</p>
+          </label>
+          {errors.name && (
+            <p className="input-box__errors">{errors.name.message}</p>
+          )}
+          <div>
+            <input
+              id="lidl"
+              type="radio"
+              value="L"
+              {...register("shop", {
+                required: {
+                  value: true,
+                  message: "You need to name a shop!",
+                },
+              })}
+            />
+            <label htmlFor="lidl" className="input-box__radio">
+              Lidl
+            </label>
+            <input
+              id="tesco"
+              type="radio"
+              value="T"
+              {...register("shop", {
+                required: {
+                  value: true,
+                  message: "You need to name a shop!",
+                },
+              })}
+            />
+            <label htmlFor="tesco" className="input-box__radio">
+              Tesco
+            </label>
+            <input
+              id="generic"
+              type="radio"
+              value="G"
+              {...register("shop", {
+                required: {
+                  value: true,
+                  message: "You need to name a shop!",
+                },
+              })}
+            />
+            <label htmlFor="generic" className="input-box__radio">
+              Generic
+            </label>
+            {errors.shop && (
+              <p className="input-box__errors">{errors.shop.message}</p>
             )}
-            <div>
-              <input
-                type="radio"
-                value="L"
-                {...register("shop", {
-                  required: {
-                    value: true,
-                    message: "You need to name a shop!",
-                  },
-                })}
-              />
-              <span className="input-box__radio">Lidl</span>
-              <input
-                type="radio"
-                value="T"
-                {...register("shop", {
-                  required: {
-                    value: true,
-                    message: "You need to name a shop!",
-                  },
-                })}
-              />
-              <span className="input-box__radio">Tesco</span>
-              <input
-                type="radio"
-                value="G"
-                {...register("shop", {
-                  required: {
-                    value: true,
-                    message: "You need to name a shop!",
-                  },
-                })}
-              />
-              <span className="input-box__radio">Generic</span>
-              {errors.shop && (
-                <p className="input-box__errors">{errors.shop.message}</p>
-              )}
-            </div>
-            <button className="input-box__button" type="submit">
-              Add
-            </button>
-          </form>
-        </section>
+          </div>
+          <button className="input-box__button" type="submit">
+            Add
+          </button>
+        </form>
+      </section>
 
-        {/* Here the filter field */}
-        <section className="filter__box">
+      {/* Here the filter field */}
+      <section className="filter__box">
+        <label aria-label="filter-box">
           <select
-            className="filter__box--select"
+            id="filter-box"
+            className="filter__box-select"
             value={filteredList}
             onChange={(e) => setFilteredList(e.target.value)}
           >
@@ -174,41 +184,41 @@ export default function App() {
             <option value="L">Lidl</option>
             <option value="T">Tesco</option>
           </select>
-        </section>
+        </label>
+      </section>
 
-        {/* Rendered Food List */}
+      {/* Rendered Food List */}
 
-        <section className="list">
-          <ul className="list__container">
-            {shoppingList.length === 0 && (
-              <p className="list__empty">No food present.</p>
-            )}
-            {shoppingList.length > 0 && filteredList.length === 0
-              ? shoppingList.map((selectedFood) => (
-                  <li key={selectedFood.id}>
-                    <FoodList
-                      food={selectedFood}
-                      deleteFood={deleteFood}
-                      buyFood={buyFood}
-                    />
-                  </li>
-                ))
-              : shoppingList
-                  .filter((data) => data.shop === filteredList)
-                  .map((selectedFood) => {
-                    return (
-                      <li key={selectedFood.id}>
-                        <FoodList
-                          food={selectedFood}
-                          deleteFood={deleteFood}
-                          buyFood={buyFood}
-                        />
-                      </li>
-                    );
-                  })}
-          </ul>
-        </section>
-      </main>
-    </>
+      <section className="list">
+        <ul className="list__container">
+          {shoppingList.length === 0 && (
+            <p className="list__empty">No food present.</p>
+          )}
+          {shoppingList.length > 0 && filteredList.length === 0
+            ? shoppingList.map((selectedFood) => (
+                <li key={selectedFood.id}>
+                  <FoodList
+                    food={selectedFood}
+                    deleteFood={deleteFood}
+                    buyFood={buyFood}
+                  />
+                </li>
+              ))
+            : shoppingList
+                .filter((data) => data.shop === filteredList)
+                .map((selectedFood) => {
+                  return (
+                    <li key={selectedFood.id}>
+                      <FoodList
+                        food={selectedFood}
+                        deleteFood={deleteFood}
+                        buyFood={buyFood}
+                      />
+                    </li>
+                  );
+                })}
+        </ul>
+      </section>
+    </main>
   );
 }
