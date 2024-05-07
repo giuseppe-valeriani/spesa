@@ -1,5 +1,6 @@
 {
   "name": "spesa",
+  "homepage": "https://gvaleriani.dev/spesa",
   "private": "true",
   "version": "0.0.0",
   "type": "module",
